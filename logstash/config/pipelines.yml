@@ -1,0 +1,5 @@
+- pipeline.id: psql
+  path.config: "/usr/share/logstash/pipeline/logstash-psql.conf"
+
+- pipeline.id: tcp_beats
+  path.config: "/usr/share/logstash/pipeline/logstash-beats.conf"

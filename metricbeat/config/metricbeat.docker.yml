@@ -1,0 +1,103 @@
+#========================== Modules configuration ============================
+metricbeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+  # Set to true to enable config reloading
+  reload.enabled: false
+  # Period on which files under path should be checked for changes
+  reload.period: 10s
+#==================== autodiscover ========================================
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+#==================== Elasticsearch template setting ==========================
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression
+  #_source.enabled: false
+#============================== Dashboards =====================================
+# These settings control loading the sample dashboards to the Kibana index. Loading
+# the dashboards is disabled by default and can be enabled either by setting the
+# options here, or by using the `-setup` CLI flag or the `setup` command.
+setup.dashboards.enabled: true
+#============================== Kibana =====================================
+# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+# This requires a Kibana endpoint configuration.
+setup.kibana.host: "http://kibana:5601"
+setup.kibana.username: "lklt0622"
+setup.kibana.password: "Bouharoun42&"
+#================================ Outputs =====================================
+# Configure what output to use when sending the data collected by the beat.
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  hosts: ["elasticsearch"]
+  username: "elastic"
+  password: "1JA2JP8CSzf0eQeJGO4O"
+
+#output.logstash:
+#  hosts: ["logstash:5044"]
+#  username: "logstash_system"
+#  password: "wUm6Hdy2xGM0gCB9Dg27"
+
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
+metricbeat.modules:
+  - module: docker
+    metricsets:
+      - "container"
+      - "cpu"
+      - "diskio"
+      - "healthcheck"
+      - "info"
+      #- "image"
+      - "memory"
+      - "network"
+    hosts: ["unix:///var/run/docker.sock"]
+    period: 10s
+    enabled: true
+
+  - module: elasticsearch
+    metricsets:
+      - node
+      - node_stats
+      #- index
+      #- index_recovery
+      #- index_summary
+      #- shard
+      #- ml_job
+    period: 10s
+    hosts: [ "http://elasticsearch:9200" ]
+    username: "elastic"
+    password: "1JA2JP8CSzf0eQeJGO4O"
+
+  - module: system
+    metricsets:
+      - cpu             # CPU usage
+      - load            # CPU load averages
+      - memory          # Memory usage
+      - network         # Network IO
+      - process         # Per process metrics
+      - process_summary # Process summary
+      - uptime          # System Uptime
+      - socket_summary  # Socket summary
+      #- core           # Per CPU core usage
+      #- diskio         # Disk IO
+      #- filesystem     # File system usage for each mountpoint
+      #- fsstat         # File system summary metrics
+      #- raid           # Raid
+      #- socket         # Sockets and connection info (linux only)
+      #- service        # systemd service information
+    enabled: true
+    period: 10s
+    processes: [ '.*' ]
+
+    # Configure the metric types that are included by these metricsets.
+    cpu.metrics: [ "percentages","normalized_percentages" ]  # The other available option is ticks.
+    core.metrics: [ "percentages" ]  # The other available option is ticks.
+

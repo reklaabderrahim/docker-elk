@@ -1,0 +1,12 @@
+
+docker stack deploy -c docker-stack.yml elk
+docker stack deploy -c stack-proxy-global.yml elk
+
+docker stack services elk
+docker stack services proxy
+
+docker stack rm elk
+docker stack rm proxy
+
+docker service logs elk_metricbeats
+

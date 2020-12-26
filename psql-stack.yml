@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "9090:80"
+    volumes:
+      - "pgadmin-vabf:/var/lib/pgadmin"
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=orange-banbou@orange.com"
+      - "PGADMIN_DEFAULT_PASSWORD=pbaq01owner"
+    networks:
+      - postgres
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  db:
+    image: 127.0.0.1:5050/postgres-vabf:v1
+    volumes:
+      - "dbdata-vabf:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - postgres
+      - log
+    deploy:
+      mode: replicated
+      replicas: 1
+
+volumes:
+  dbdata-vabf:
+  pgadmin-vabf:
+
+networks:
+  log:
+    external: true
+  postgres:
+    driver: overlay

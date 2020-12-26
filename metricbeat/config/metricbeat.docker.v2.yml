@@ -1,0 +1,98 @@
+#========================== Modules configuration ============================
+metricbeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+  # Set to true to enable config reloading
+  reload.enabled: false
+  # Period on which files under path should be checked for changes
+  reload.period: 10s
+#==================== autodiscover ========================================
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+#==================== Elasticsearch template setting ==========================
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression
+  #_source.enabled: false
+#============================== Dashboards =====================================
+# These settings control loading the sample dashboards to the Kibana index. Loading
+# the dashboards is disabled by default and can be enabled either by setting the
+# options here, or by using the `-setup` CLI flag or the `setup` command.
+setup.dashboards.enabled: true
+
+#========================== Elasticsearch output ===============================
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  username: "elastic"
+  password: "1JA2JP8CSzf0eQeJGO4O"
+
+#output.logstash:
+#    hosts: ["${LOGSTASH_HOST}:5044"]
+#    username: ${LOGSTASH_USER}
+#    password: ${LOGSTASH_PASSWORD}
+
+#============================== Kibana =========================================
+setup.kibana.host: "http://kibana:5601"
+setup.kibana.username: "lklt0622"
+setup.kibana.password: "Bouharoun42&"
+
+#============================== Xpack Monitoring ===============================
+xpack.monitoring:
+  enabled: true
+  elasticsearch:
+
+
+metricbeat.modules:
+  #------------------------------- System Module -------------------------------
+  - module: system
+    metricsets: ["cpu", "load", "memory", "network", "process", "process_summary", "core", "diskio", "socket"]
+    processes: ['.*']
+    process.include_top_n:
+      by_cpu: 5
+      by_memory: 5
+    period: 10s
+    cpu.metrics:  ["percentages"]
+    core.metrics: ["percentages"]
+
+  - module: system
+    period: 1m
+    metricsets:
+      - filesystem
+      - fsstat
+    processors:
+      - drop_event.when.regexp:
+          system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib)($|/)'
+
+  - module: system
+    period: 15m
+    metricsets:
+      - uptime
+
+  #------------------------------- Docker Module -------------------------------
+  - module: docker
+    metricsets: ["container", "cpu", "diskio", "healthcheck", "info", "memory", "network"]
+    hosts: ["unix:///var/run/docker.sock"]
+    period: 10s
+    enabled: true
+
+
+  #------------------------------- Elastic Module -------------------------------
+  - module: elasticsearch
+    metricsets: ["node", "node_stats"]
+    period: 10s
+    hosts: ["elasticsearch:9200"]
+    username: "elastic"
+    password: "1JA2JP8CSzf0eQeJGO4O"
+
+#================================ Processors ===================================
+
+
+processors:
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_locale:
+      format: offset
+  - add_host_metadata:
+      netinfo.enabled: true
