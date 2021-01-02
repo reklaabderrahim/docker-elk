@@ -1,0 +1,63 @@
+version: '3.7'
+
+x-default-opts:
+  &default-opts
+  logging:
+    options:
+      max-size: "1m"
+
+services:
+  metricbeat:
+    <<: *default-opts
+    image: docker.elastic.co/beats/metricbeat:${ELASTIC_VERSION:-7.10.1}
+    hostname: "{{.Node.Hostname}}-metricbeat"
+    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
+    configs:
+      - source: metricbeat_config
+        target: /usr/share/metricbeat/metricbeat.yml
+    volumes:
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - metricbeat:/usr/share/metricbeat/data
+    user: root
+    networks:
+      - log
+    deploy:
+      mode: global
+
+  filebeat:
+    <<: *default-opts
+    image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION:-7.10.1}
+    hostname: "{{.Node.Hostname}}-filebeat"
+    command: ["--strict.perms=false"]
+    configs:
+      - source: filebeat_config
+        target: /usr/share/filebeat/filebeat.yml
+    volumes:
+      - filebeat:/usr/share/filebeat/data
+      - ./filebeat/external:/usr/share/filebeat/external
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+      - /var/log/:/var/log/:ro
+      - /var/log/audit/:/var/log/audit/:ro
+    user: root
+    networks:
+      - log
+    deploy:
+      mode: global
+
+configs:
+  metricbeat_config:
+    file: ./metricbeat/config/metricbeat.docker.v2.yml
+  filebeat_config:
+    file: ./filebeat/filebeat.yml
+
+networks:
+  log:
+    external: true
+
+volumes:
+  filebeat:
+  metricbeat:

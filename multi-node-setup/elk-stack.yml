@@ -1,0 +1,135 @@
+version: '3.7'
+
+x-default-opts:
+  &default-opts
+  logging:
+    options:
+      max-size: "1m"
+
+services:
+  es1:
+    <<: *default-opts
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    configs:
+      - source: elastic_master_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - target: 9200
+        published: 9200
+        protocol: tcp
+        mode: host
+    environment:
+      - node.name=es1
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    networks:
+      - elk
+      - log
+    volumes:
+      - elasticsearch1:/usr/share/elasticsearch/data
+    deploy:
+#      placement:
+#        constraints: [ node.hostname == kubernetes-01.local ]
+      endpoint_mode: dnsrr
+      mode: "replicated"
+      replicas: 2
+  es2:
+    <<: *default-opts
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    configs:
+      - source: elastic_data_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - node.name=es2
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    networks:
+      - elk
+      - log
+    volumes:
+      - elasticsearch2:/usr/share/elasticsearch/data
+    deploy:
+      endpoint_mode: dnsrr
+      mode: "replicated"
+      replicas: 2
+  es3:
+    <<: *default-opts
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    configs:
+      - source: elastic_data_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - node.name=es3
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    networks:
+      - elk
+      - log
+    volumes:
+      - elasticsearch3:/usr/share/elasticsearch/data
+    deploy:
+      endpoint_mode: dnsrr
+      mode: "replicated"
+      replicas: 2
+
+  kibana:
+    <<: *default-opts
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    networks:
+      - elk
+      - proxy
+      - log
+    ports:
+    - 5601:5601
+    deploy:
+      mode: replicated
+      replicas: 1
+      update_config:
+        failure_action: rollback
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+      labels:
+        - traefik.frontend.rule=Host:kibana.localhost
+        - traefik.http.routers.kibana.service=kibana
+        - traefik.http.services.kibana.loadbalancer.server.port=5601
+
+  visualizer:
+    image: dockersamples/visualizer
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - proxy
+    deploy:
+      placement:
+        constraints: [ node.role == manager ]
+      labels:
+        - traefik.frontend.rule=Host:visualizer.localhost
+        - traefik.http.routers.visualizer.service=visualizer
+        - traefik.http.services.visualizer.loadbalancer.server.port=8080
+
+configs:
+  elastic_master_config:
+    file: ./config/elk/elasticsearch-master.yml
+  elastic_data_config:
+    file: ./config/elk/elasticsearch-data.yml
+  kibana_config:
+    file: ./config/elk/kibana.yml
+
+networks:
+  log:
+    driver: overlay
+    name: log
+  proxy:
+    external: true
+  elk:
+    driver: overlay
+
+volumes:
+  elasticsearch1:
+  elasticsearch2:
+  elasticsearch3:

@@ -2,29 +2,75 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7af7a14c-b97d-4824-8ce1-3d052d8a9e82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/filebeat/config/filebeat.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logstash/logs/logstash-tutorial.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logstash/pipeline/logstash-beats.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logstash/pipeline/logstash-psql.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/docker-compose/docker" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/docker-compose/docker-compose-vabf.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/docker-compose/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/ressources/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/ressources/Dockerfile.db.vabf.dump" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/ressources/scripts/init-dump.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postgres/ressources/scripts/init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/psql-stack.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-stack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-stack.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elasticsearch/config/elasticsearch.yml" beforeDir="false" afterPath="$PROJECT_DIR$/elasticsearch/config/elasticsearch.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kibana/config/kibana.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kibana/config/kibana.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logstash/config/logstash.yml" beforeDir="false" afterPath="$PROJECT_DIR$/logstash/config/logstash.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logstash/pipeline/logstash.conf" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/multi-node-setup/config/elk/elasticsearch-data.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/multi-node-setup/config/elk/elasticsearch-master.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/multi-node-setup/deployRegistry.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/beats-stack.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/deployRegistry.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/elk-stack.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/filebeat/external/apache.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/filebeat/external/logs/logstash-tutorial.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/filebeat/filebeat.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/kibana/config/kibana.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/log-stack.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/config/logstash.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/config/pipelines.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/jdbc_lib/postgresql-42.2.18.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/logs/apache.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/pipeline/logstash-beats.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/logstash/pipeline/logstash-psql.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/metricbeat/config/metricbeat.docker.v2.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/metricbeat/config/metricbeat.docker.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/playStack.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/postgres/docker-compose/docker" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/postgres/ressources/Dockerfile.db.vabf.dump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/postgres/ressources/scripts/init-dump.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/proxy-stack.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/psql-stack.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/single-node-setup/rmStack.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-cmd.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-elastic-master/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker-elastic-master/Vagrantfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-elk-logbeats.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/log-stack.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-stack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/elk-stack.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elasticsearch/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/elasticsearch/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elasticsearch/config/elasticsearch.yml" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/elasticsearch/config/elasticsearch.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/enterprise-search/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/enterprise-search/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filebeat/config/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/filebeat/filebeat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kibana/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/kibana/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kibana/config/kibana.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/elk/kibana.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/config/logstash.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/config/logstash.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/config/pipelines.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/config/pipelines.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/jdbc_lib/postgresql-42.2.18.jar" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/jdbc_lib/postgresql-42.2.18.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/logs/apache.log" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/logs/apache.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/logs/logstash-tutorial.log" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/logs/logstash-tutorial.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/pipeline/logstash-beats.conf" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/pipeline/logstash-beats.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logstash/pipeline/logstash-psql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/logstash/pipeline/logstash-psql.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metricbeat/config/metricbeat.docker.v2.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/metricbeat/metricbeat.docker.v2.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metricbeat/config/metricbeat.docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/log/metricbeat/metricbeat.docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pass.txt" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/pass.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/docker-compose/docker" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/pass.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/docker-compose/docker-compose-vabf.yml" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/postgres/docker-compose/docker-compose-vabf.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/docker-compose/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/postgres/docker-compose/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/ressources/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/postgres/ressources/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/ressources/Dockerfile.db.vabf.dump" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/psql/Dockerfile.db.vabf.dump" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/ressources/scripts/init-dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/config/psql/init-dump.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgres/ressources/scripts/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/single-node-setup/postgres/ressources/scripts/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/psql-stack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/psql-stack.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stack-proxy-global.yml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-node-setup/proxy-stack.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,7 +79,11 @@
     <option name="context" value="kubernetes-admin@kubernetes" />
     <option name="namespace" value="default" />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1m9EEaVDd92WlcBDNUKkaYqnhEp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -43,25 +93,49 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/metricbeat/config" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="jdk.selected.JAVA_MODULE" value="openjdk-15" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/metricbeat/config" />
-      <recent name="$PROJECT_DIR$/filebeat/config" />
-      <recent name="$PROJECT_DIR$/logstash/logs" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/logstash" />
+      <recent name="$PROJECT_DIR$/single-node-setup" />
+      <recent name="$PROJECT_DIR$/multi-node-setup/config/psql" />
+      <recent name="$PROJECT_DIR$/multi-node-setup" />
+      <recent name="$PROJECT_DIR$/multi-node-setup/config" />
+      <recent name="$PROJECT_DIR$/multi-node-setup/config/elk" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/logstash/lib" />
+      <recent name="$PROJECT_DIR$/single-node-setup/filebeat/external" />
+      <recent name="$PROJECT_DIR$/single-node-setup/filebeat" />
+      <recent name="$PROJECT_DIR$/single-node-setup/filebeat/logs" />
+      <recent name="$PROJECT_DIR$/single-node-setup" />
+      <recent name="$PROJECT_DIR$/multi-node-setup/config/log/filebeat" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -74,10 +148,20 @@
       <workItem from="1608897297985" duration="8942000" />
       <workItem from="1608920347125" duration="7217000" />
       <workItem from="1608966605187" duration="843000" />
+      <workItem from="1608977377822" duration="7475000" />
+      <workItem from="1608986805489" duration="4559000" />
+      <workItem from="1608992360956" duration="16758000" />
+      <workItem from="1609052153957" duration="13302000" />
+      <workItem from="1609483697981" duration="269000" />
+      <workItem from="1609484013395" duration="4388000" />
+      <workItem from="1609533598981" duration="4888000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
   </component>
 </project>

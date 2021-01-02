@@ -131,4 +131,4 @@ Docker container: [Running Enterprise Search Using Docker][enterprisesearch-dock
 [enterprisesearch-docs]: https://www.elastic.co/guide/en/enterprise-search/current/index.html
 
 [es-security]: https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html#api-key-service-settings
-[config-es]: ../../elasticsearch/config/elasticsearch.yml
+[config-es]: ../../single-node-setup/elasticsearch/config/elasticsearch.yml

@@ -1,0 +1,4 @@
+- type: log
+  paths:
+    - /usr/share/filebeat/external/logs/logstash-tutorial.log
+  scan_frequency: 10s

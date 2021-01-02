@@ -1,0 +1,69 @@
+version: '3.7'
+
+x-default-opts:
+  &default-opts
+  logging:
+    options:
+      max-size: "1m"
+
+services:
+
+  elasticsearch:
+    <<: *default-opts
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    configs:
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      node.name: "elasticsearch"
+      ES_JAVA_OPTS: "-Xmx4g -Xms4g"
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      discovery.type: single-node
+      # Force publishing on the 'elk' overlay.
+      network.publish_host: _eth0_
+    networks:
+      - elk
+      - log
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  kibana:
+    <<: *default-opts
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    networks:
+      - elk
+      - proxy
+      - log
+    ports:
+    - 5601:5601
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - traefik.frontend.rule=Host:kibana.localhost
+        - traefik.http.routers.kibana.service=kibana
+        - traefik.http.services.kibana.loadbalancer.server.port=5601
+
+configs:
+  elastic_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+
+networks:
+  log:
+    driver: overlay
+    name: log
+  proxy:
+    external: true
+  elk:
+    driver: overlay
+
+volumes:
+  elasticsearch:

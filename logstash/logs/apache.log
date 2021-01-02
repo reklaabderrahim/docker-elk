@@ -1,7 +1,0 @@
-114.79.29.202 - - [04/Jun/2013:01:57:15 -0700] "GET /tt/change_password.php HTTP/1.1" 200 2177
-114.79.29.201 - - [04/Jun/2014:01:57:15 -0700] "GET /yy/change_password.php HTTP/1.1" 200 2177
-114.79.29.203 - - [04/Jun/2015:01:57:15 -0700] "POST /ee/change_password.php HTTP/1.1" 201 2177
-114.79.29.204 - - [04/Jun/2016:01:57:15 -0700] "GET /zz/change_password.php HTTP/1.1" 200 2177
-114.79.29.202 - - [04/Jun/2017:01:57:15 -0700] "PUT /zz/change_password.php HTTP/1.1" 200 2177
-114.79.29.203 - - [04/Jun/2013:01:57:15 -0700] "GET /zz/change_password.php HTTP/1.1" 200 2177
-114.79.29.202 - - [04/Jun/2018:01:57:15 -0700] "GET /aa/change_password.php HTTP/1.1" 200 2177

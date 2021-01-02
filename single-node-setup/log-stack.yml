@@ -1,0 +1,48 @@
+version: '3.7'
+
+x-default-opts:
+  &default-opts
+  logging:
+    options:
+      max-size: "1m"
+
+services:
+  logstash:
+    <<: *default-opts
+    image: docker.elastic.co/logstash/logstash:7.10.1
+    ports:
+      - "5044:5044"
+      - "5000:5000"
+      - "9600:9600"
+    configs:
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_multiple_config
+        target: /usr/share/logstash/config/pipelines.yml
+      - source: logstash_psql_pipeline
+        target: /usr/share/logstash/pipeline/logstash-psql.conf
+      - source: logstash_beats_pipeline
+        target: /usr/share/logstash/pipeline/logstash-beats.conf
+    environment:
+      LS_JAVA_OPTS: "-Xmx2g -Xms2g"
+    networks:
+      - log
+    volumes:
+      - ./logstash/jdbc_lib:/usr/share/logstash/jdbc_lib
+    deploy:
+      mode: replicated
+      replicas: 1
+configs:
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  logstash_multiple_config:
+    file: ./logstash/config/pipelines.yml
+  logstash_beats_pipeline:
+    file: ./logstash/pipeline/logstash-beats.conf
+  logstash_psql_pipeline:
+    file: ./logstash/pipeline/logstash-psql.conf
+
+networks:
+  log:
+    external: true
+
